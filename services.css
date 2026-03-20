@@ -1,0 +1,142 @@
+/* 1. GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+:root {
+        --bg-dark: #020617;
+        --card-bg: #1e293b;
+        --accent: #00d2ff;
+        --accent-purple: #a855f7;
+        --text-main: #f8fafc;
+        --text-dim: #94a3b8;
+        }
+
+body {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        overflow-x: hidden;
+        }
+
+/* 2. STICKY NAVBAR */
+nav {
+        background: rgba(2, 6, 23, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        }
+
+.logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+.logo span { color: var(--accent); }
+
+.nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 30px; font-weight: 500; transition: 0.3s; }
+
+.nav-links a:hover { color: var(--accent); }
+
+/* 3. HERO SECTION */
+.services-hero {
+                    padding: 120px 20px;
+                    text-align: center;
+                    background: radial-gradient(circle at top, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
+                    }
+
+.services-hero h1 { font-size: 3.5rem; margin-bottom: 15px; }
+
+.services-hero p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+
+/* 4. ADVANCED SERVICE TIERS */
+.tier-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+                max-width: 1200px;
+                margin: -50px auto 100px auto;
+                padding: 0 20px;
+                }
+
+.tier-card {
+                background: rgba(30, 41, 59, 0.5);
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 24px;
+                padding: 40px;
+                transition: 0.4s ease;
+                position: relative;
+                }
+
+.tier-card:hover {
+                    transform: translateY(-10px);
+                    border-color: var(--accent);
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                    }
+
+.tier-card.featured {
+                        border: 2px solid var(--accent);
+                        background: rgba(0, 210, 255, 0.05);
+                        }
+
+.tier-card h3 { font-size: 1.8rem; margin-bottom: 10px; color: var(--accent); }
+
+.tier-card .price { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 30px; }
+
+
+.feature-list { list-style: none; margin-bottom: 40px; }
+
+.feature-list li { margin-bottom: 15px; display: flex; align-items: center; color: var(--text-main); }
+
+.feature-list li i { color: var(--accent); margin-right: 12px; font-size: 0.9rem; }
+
+.btn-action {
+                display: block;
+                text-align: center;
+                padding: 15px;
+                background: var(--accent);
+                color: var(--bg-dark);
+                text-decoration: none;
+                border-radius: 12px;
+                font-weight: 800;
+                transition: 0.3s;
+                }
+
+.btn-action:hover { background: white; transform: scale(1.05); }
+
+/* 5. THE PROCESS STEPS */
+.process-section {
+                    padding: 100px 20px;
+                    background: #0f172a;
+                    text-align: center;
+                    }
+
+.process-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                max-width: 1100px;
+                margin: 50px auto 0 auto;
+                }
+
+.step { position: relative; padding: 20px; }
+
+.step .number {
+                font-size: 3rem;
+                font-weight: 900;
+                color: rgba(255,255,255,0.05);
+                position: absolute;
+                top: 0; left: 50%; transform: translateX(-50%);
+                }
+
+.step h4 { margin-top: 20px; color: var(--accent); }
+
+.step p { font-size: 0.9rem; color: var(--text-dim); margin-top: 10px; }
+
+footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); }
