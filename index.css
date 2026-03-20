@@ -20,7 +20,32 @@ body {
         line-height: 1.6;
         overflow-x: hidden;
         }
+/* 2. PRO NAVBAR */
+nav {
+        background: rgba(2, 6, 23, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: fixed; /* Glued to top */
+        width: 100%;
+        top: 0;
+        z-index: 2000;
+        }
 
+.logo { font-size: 1.6rem; font-weight: 800; color: #fff; }
+
+.logo span { color: var(--accent-cyan); }
+
+.nav-links a {
+                color: #94a3b8;
+                text-decoration: none;
+                margin-left: 30px;
+                font-weight: 500;
+                transition: 0.3s;
+                }
 
 
 .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
@@ -157,57 +182,3 @@ nav { padding: 15px 20px; }
                         margin: 10px 0;
                         font-size: 20px;
                         }
-
-/* --- Desktop stays the same --- */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-}
-
-.menu-btn, #click {
-    display: none; /* Hidden on Desktop */
-}
-
-/* --- Mobile Fix (Screens smaller than 942px) --- */
-@media (max-width: 942px) {
-    nav {
-        padding: 15px 20px;
-    }
-
-    .menu-btn {
-        display: block; /* Show the ☰ icon */
-        cursor: pointer;
-    }
-
-    .nav-links {
-        position: fixed;
-        top: 70px; /* Adjust based on your navbar height */
-        left: -100%; /* Keep it off-screen to the left */
-        background: #0f172a; /* Same dark theme */
-        height: 100vh;
-        width: 100%;
-        text-align: center;
-        display: block;
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-
-    /* When you click the ☰ icon, the links slide in */
-    #click:checked ~ .nav-links {
-        left: 0;
-    }
-
-    .nav-links a {
-        display: block;
-        margin: 35px 0;
-        font-size: 20px;
-        color: #fff;
-    }
-    
-    /* Change icon to an 'X' when menu is open */
-    #click:checked ~ .menu-btn i::before {
-        content: "\f00d"; /* FontAwesome 'X' icon */
-    }
-}
