@@ -182,3 +182,57 @@ nav { padding: 15px 20px; }
                         margin: 10px 0;
                         font-size: 20px;
                         }
+
+/* --- Desktop stays the same --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.menu-btn, #click {
+    display: none; /* Hidden on Desktop */
+}
+
+/* --- Mobile Fix (Screens smaller than 942px) --- */
+@media (max-width: 942px) {
+    nav {
+        padding: 15px 20px;
+    }
+
+    .menu-btn {
+        display: block; /* Show the ☰ icon */
+        cursor: pointer;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px; /* Adjust based on your navbar height */
+        left: -100%; /* Keep it off-screen to the left */
+        background: #0f172a; /* Same dark theme */
+        height: 100vh;
+        width: 100%;
+        text-align: center;
+        display: block;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+
+    /* When you click the ☰ icon, the links slide in */
+    #click:checked ~ .nav-links {
+        left: 0;
+    }
+
+    .nav-links a {
+        display: block;
+        margin: 35px 0;
+        font-size: 20px;
+        color: #fff;
+    }
+    
+    /* Change icon to an 'X' when menu is open */
+    #click:checked ~ .menu-btn i::before {
+        content: "\f00d"; /* FontAwesome 'X' icon */
+    }
+}
