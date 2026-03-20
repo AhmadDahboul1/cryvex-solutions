@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Cryvex HQ | Command Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --accent: #00d4ff; --bg: #02060c; --card: #0a192f; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,212,255,0.2); padding-bottom: 15px; margin-bottom: 30px; }
+        .logo span { color: var(--accent); font-weight: bold; text-shadow: 0 0 10px rgba(0,212,255,0.3); }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .full-width { grid-column: span 2; }
+        
+        .card { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .card h2 { font-size: 1.1rem; margin-top: 0; display: flex; align-items: center; gap: 10px; color: var(--accent); }
+
+        /* Formspree Link Section */
+        .external-link { display: block; background: rgba(0,212,255,0.1); border: 1px dashed var(--accent); padding: 20px; text-align: center; color: white; text-decoration: none; border-radius: 10px; transition: 0.3s; }
+        .external-link:hover { background: rgba(0,212,255,0.2); transform: scale(1.02); }
+
+        /* Service Manager */
+        .service-editor textarea { width: 100%; background: #000; color: #00ff88; border: 1px solid #333; padding: 10px; font-family: monospace; font-size: 0.8rem; border-radius: 5px; height: 150px; }
+        .copy-btn { margin-top: 10px; padding: 10px; background: var(--accent); color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+
+        @media (max-width: 800px) { .dashboard-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">CRYVEX <span>CONTROL CENTER</span></div>
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <h2><i class="fas fa-database"></i> Lead Database</h2>
+            <p>Access all technical inquiries and client messages directly on Formspree.</p>
+            <a href="https://formspree.io/forms" target="_blank" class="external-link">
+                <i class="fas fa-external-link-alt"></i> OPEN FORMSPREE DASHBOARD
+            </a>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-cash-register"></i> Installation Margin</h2>
+            <div style="display:flex; gap:10px;">
+                <input type="number" id="cost" placeholder="Cost $" style="flex:1; padding:8px; background:#050b14; border:1px solid #333; color:white;">
+                <input type="number" id="sale" placeholder="Sale $" style="flex:1; padding:8px; background:#050b14; border:1px solid #333; color:white;">
+            </div>
+            <button onclick="calc()" class="copy-btn">ANALYZE PROFIT</button>
+            <p id="profitOut" style="text-align:center; font-weight:bold;"></p>
+        </div>
+
+        <div class="card full-width">
+    <h2><i class="fas fa-pen-fancy"></i> Visual Service Editor</h2>
+    <p>Type the new details below. The code at the bottom updates automatically.</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">CARD 1 TITLE</label>
+            <input type="text" id="t1" value="Advanced AI CCTV" oninput="updateLiveCode()" style="width:90%; background:none; border:1px solid #333; color:white; margin-bottom:10px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">DESCRIPTION</label>
+            <textarea id="d1" oninput="updateLiveCode()" style="width:90%; height:60px; background:none; border:1px solid #333; color:white;">Smart cameras with facial recognition...</textarea>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">CARD 2 TITLE</label>
+            <input type="text" id="t2" value="Hybrid Communication" oninput="updateLiveCode()" style="width:90%; background:none; border:1px solid #333; color:white; margin-bottom:10px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">DESCRIPTION</label>
+            <textarea id="d2" oninput="updateLiveCode()" style="width:90%; height:60px; background:none; border:1px solid #333; color:white;">Internal communication systems...</textarea>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">CARD 3 TITLE</label>
+            <input type="text" id="t3" value="Biometric Access" oninput="updateLiveCode()" style="width:90%; background:none; border:1px solid #333; color:white; margin-bottom:10px;">
+            <label style="font-size: 0.7rem; color: var(--accent);">DESCRIPTION</label>
+            <textarea id="d3" oninput="updateLiveCode()" style="width:90%; height:60px; background:none; border:1px solid #333; color:white;">Secure entry points utilizing fingerprint...</textarea>
+        </div>
+    </div>
+
+    <label>Generated Code (Copy this to index.html):</label>
+    <textarea id="finalCode" readonly style="width:100%; height:100px; background:#000; color:#00ff88; font-family:monospace;"></textarea>
+    <button class="copy-btn" onclick="copyUpdatedCode()">Copy All Cards</button>
+</div>
+    </div>
+
+    <script>
+        // Password Protection (Enter "Cryvex2026")
+        const key = prompt("System Challenge: Enter Clearance");
+        if(key !== "Cryvex2026") window.location.href = "index.html";
+
+        function calc() {
+            const p = document.getElementById('sale').value - document.getElementById('cost').value;
+            document.getElementById('profitOut').innerText = "Net Profit: $" + p;
+        }
+
+        function copyCode() {
+            const code = document.getElementById('serviceCode');
+            code.select();
+            document.execCommand('copy');
+            alert("Code copied! Now paste it into your index.html service section.");
+        }
+
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        function updateLiveCode() {
+    const cards = [
+        { id: 1, icon: 'fa-video' },
+        { id: 2, icon: 'fa-microchip' },
+        { id: 3, icon: 'fa-fingerprint' }
+    ];
+
+    let fullHTML = "";
+    
+    cards.forEach(card => {
+        const title = document.getElementById(`t${card.id}`).value;
+        const desc = document.getElementById(`d${card.id}`).value;
+        
+        fullHTML += `
+<div class="card">
+    <i class="fas ${card.icon}"></i>
+    <h3>${title}</h3>
+    <p>${desc}</p>
+</div>\n`;
+    });
+
+    document.getElementById('finalCode').value = fullHTML;
+}
+
+// Run once on load to fill the box
+updateLiveCode();
+
+function copyUpdatedCode() {
+    const codeBox = document.getElementById('finalCode');
+    codeBox.select();
+    document.execCommand('copy');
+    alert("Cryvex HQ: New service cards copied to clipboard!");
+}
+    </script>
+
+    
+</body>
+</html>
